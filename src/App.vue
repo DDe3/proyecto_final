@@ -1,10 +1,35 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="inicio" v-if="true">
+    <Ingreso @token="saveToken($event)"/>
   </div>
-  <router-view/>
+
+  <div>
+    <NavBar :token="token"/>
+    <router-view />
+  </div>
 </template>
+
+<script>
+import Ingreso from "../src/views/Ingreso.vue";
+import NavBar from "./components/NavBar.vue"
+
+export default {
+  components: {
+    Ingreso,
+    NavBar,
+  },
+  data() {
+    return {
+      token: null,
+    }
+  },
+  methods: {
+    saveToken(data) {
+      this.token = data
+    }
+  },
+};
+</script>
 
 <style>
 #app {
@@ -14,17 +39,12 @@
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
+div.b {
+  position: absolute;
+  right: 0;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#inicio {
+  margin: auto;
 }
 </style>
